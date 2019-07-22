@@ -18,3 +18,8 @@ The if username is not in session part does not work for me, is there something 
 		            .execute()
 
 		    return render_template('incomplete.jinja2', tasks=Task.select().where(Task.performed.is_null()))
+
+
+				Not Found
+
+				The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
