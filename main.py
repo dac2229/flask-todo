@@ -8,10 +8,10 @@ from model import Task, User
 
 app = Flask(__name__)
 app.secret_key = b'\x9d\xb1u\x08%\xe0\xd0p\x9bEL\xf8JC\xa3\xf4J(hAh\xa4\xcdw\x12S*,u\xec\xb8\xb8'
-app.secret_key = os.environ.get('SECRET_KEY').encode()
+#app.secret_key = os.environ.get('SECRET_KEY').encode()
 
 @app.route('/all')
-def all_tasks():
+def all():
  return render_template('all.jinja2', tasks=Task.select())
 
 
@@ -24,7 +24,7 @@ def create():
         task = Task(name=request.form['name'])
         task.save()
 
-        return redirect(url_for('all_tasks'))
+        return redirect(url_for('all'))
     else:
         return render_template('create.jinja2')
 
@@ -36,7 +36,7 @@ def login():
 
         if user and pbkdf2_sha256.verify(request.form['password'], user.password):
             session['username'] = request.form['name']
-            return redirect(url_for('all_tasks'))
+            return redirect(url_for('all'))
 
         return render_template('login.jinja2', error="Incorrect username or password.")
 
